@@ -63,9 +63,7 @@ export const checkValidityName = (names = null) =>{
 
 //desc: action to check email format validity
 export const checkValidityEmail = (emailAddress=null) =>{
-    console.log(emailAddress);
     let testReg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    console.log(testReg.test(emailAddress));
     return {
         type: "CHECK_VALIDITY_EMAIL",
         payload: testReg.test(emailAddress)
@@ -123,7 +121,6 @@ export const getRequestAction = url => async dispatch => {
     let response = [], error = "";
     try {
         response = await request.get(`${url}`);
-        console.log(response);
     } catch (e) {
         error = e;
     }
