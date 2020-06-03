@@ -1,0 +1,26 @@
+.AllSteps{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.Step{
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    border: 1px solid #585e61;
+    -moz-border-radius: 70px;
+    -webkit-border-radius: 70px;
+    border-radius: 70px;
+    color: #ECF0F1;
+    background-color: #5D6D7E
+}
+
+.Hr{
+    width: 150px;
+    height: 1px;
+    border: 0;
+    background-color: #5D6D7E;
+}
