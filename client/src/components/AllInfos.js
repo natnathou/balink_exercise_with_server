@@ -58,6 +58,8 @@ class AllInfos extends React.Component{
                 if (this.props.valueInput.country === ''){
                     this.props.borderAlertCountryMissing("1px solid #E74C3C");
                 } else {
+                    // we remove border color. (the border was to alert the client that he did not choose a country)
+                    this.props.borderAlertCountryMissing("0px solid");
                     this.props.changeStep(3);
                     this.refButtons.current.style.cssText = "justify-content: space-between;";
                 }

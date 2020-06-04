@@ -54,8 +54,12 @@ class AddressInfo extends React.Component{
         if(this.props.countryReducer.response){
             return(
                 <select
+                    value={this.props.valueInput.country}
                     ref={this.refSelect}
-                    onChange={async (e) => await this.props.updateInput("country", e.target.value)}
+                    onChange={async (e) => {
+                        await this.props.updateInput("country", e.target.value);
+
+                    }}
                     style={{border: `${this.props.cssChangeBorderAlertCountryMissingReducer}`}}
                 >
                     {this.listCountry()}
