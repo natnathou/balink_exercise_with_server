@@ -10,10 +10,10 @@ export const updateListCountryInDictionary = (objectToUpdate) => {
 
 // desc: action to change the display language
 export const changeLanguage = (language) => async (dispatch,getState) => {
-    let {jsonLanguageReducer} = getState();
+    let {dictionaryReducer} = getState();
     dispatch({
         type: "CHANGE_LANGUAGE",
-        payload: {jsonLanguageReducer, language}
+        payload: {dictionaryReducer, language}
     })
 };
 
@@ -143,9 +143,9 @@ export const getRequestAction = url => async dispatch => {
 };
 
 
-export const borderAlertCountryMissing = (cssChange) => {
+export const colorCountryMissing = (cssChange) => {
     return {
-        type: "BORDER_ALERT_COUNTRY_MISSING",
+        type: "COUNTRY_MISSING",
         payload: cssChange
     }
 

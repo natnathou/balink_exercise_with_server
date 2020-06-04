@@ -3,7 +3,7 @@ import lang from "../language/lang"
 
 //desc: reducer, to to store our dictionary in our state and when we fetch list country from our server we update the dictionary
 
-const jsonLanguageReducer = ( defaultLanguage = lang, action) => {
+const dictionaryReducer = ( defaultLanguage = lang, action) => {
     switch (action.type) {
         case "UPDATE_DICTIONARY":
             let languageUpdated = {...defaultLanguage};
@@ -20,7 +20,7 @@ const jsonLanguageReducer = ( defaultLanguage = lang, action) => {
 const languageReducer = ( defaultLanguage = {}, action) => {
     switch (action.type){
         case "CHANGE_LANGUAGE":
-            return action.payload.jsonLanguageReducer[action.payload.language];
+            return action.payload.dictionaryReducer[action.payload.language];
         default:
             return defaultLanguage;
     }
@@ -110,9 +110,9 @@ const successReducer = (state={
     }
 };
 
-const cssChangeBorderAlertCountryMissingReducer = (css="#5D6D7E", action) => {
+const cssChangeColorCountryMissingReducer = (css="#5D6D7E", action) => {
     switch (action.type) {
-        case "BORDER_ALERT_COUNTRY_MISSING":
+        case "COUNTRY_MISSING":
             return (action.payload);
         default:
             return css;
@@ -120,11 +120,11 @@ const cssChangeBorderAlertCountryMissingReducer = (css="#5D6D7E", action) => {
 };
 
 export default combineReducers({
-    jsonLanguageReducer,
+    dictionaryReducer,
     languageReducer,
     stepReducer,
     valueInput,
     countryReducer,
     successReducer,
-    cssChangeBorderAlertCountryMissingReducer,
+    cssChangeColorCountryMissingReducer,
 })

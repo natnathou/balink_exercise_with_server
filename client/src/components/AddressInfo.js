@@ -1,24 +1,28 @@
 import React  from "react";
 import {connect} from "react-redux";
-import {updateInput,getRequestAction,checkValidityName,updateListCountryInDictionary,borderAlertCountryMissing} from "../actions"
+import {updateInput,getRequestAction,checkValidityName,updateListCountryInDictionary,colorCountryMissing} from "../actions"
 import "../Style/Form.css"
 
 class AddressInfo extends React.Component{
     constructor(props) {
         super(props);
         this.refSelect = React.createRef();
+        this.state= {updateListCountryCompleted:false};
     }
     componentDidMount() {
         // get request with axios to get the list of all country from our server
         this.getRequestAsyncAwait();
+
     }
 
     getRequestAsyncAwait = async () =>{
         await this.props.getRequestAction('country');
         if (this.props.countryReducer.response){
-            this.props.updateListCountryInDictionary(this.props.countryReducer.response);
+             this.props.updateListCountryInDictionary(this.props.countryReducer.response);
+             this.setState({updateListCountryCompleted:true}); //we update the state to force the component to rerender itself
         }
     };
+
     // methode to display our country list
     selectRender= ()=> {
          return(
@@ -32,15 +36,15 @@ class AddressInfo extends React.Component{
                         // we check with == and not === because at  initialisation valueInput.country is a number and after it's updated it change his type
                         if (this.props.valueInput.country == 0){
                             // if the user change his select for "no select" so we want to alert him
-                            this.props.borderAlertCountryMissing("#E74C3C");
+                            this.props.colorCountryMissing("#E74C3C");
                         } else {
                             // we remove the alert
-                            this.props.borderAlertCountryMissing("#5D6D7E");
+                            this.props.colorCountryMissing("#5D6D7E");
                         }
                     }}
-                    style={{color: `${this.props.cssChangeBorderAlertCountryMissingReducer}`}}
+                    style={{color: `${this.props.cssChangeColorCountryMissingReducer}`}}
                 >
-                    {this.props.languageReducer.listCountry.map(  (data, index) => {
+                    {this.props.languageReducer.listCountry.map((data,index) => {
                         return (<option value={index} key={data}>{data}</option>)
                     })}
                 </select>
@@ -72,10 +76,9 @@ class AddressInfo extends React.Component{
 }
 
 const mapStateToProps = state => {
-    let {languageReducer,valueInput,countryReducer,cssChangeBorderAlertCountryMissingReducer} = state;
-    console.log(state);
-    return {languageReducer,valueInput,countryReducer,cssChangeBorderAlertCountryMissingReducer}
+    let {languageReducer,valueInput,countryReducer,cssChangeColorCountryMissingReducer} = state;
+    return {languageReducer,valueInput,countryReducer,cssChangeColorCountryMissingReducer}
 };
 export default connect(
-    mapStateToProps, {updateInput,getRequestAction,checkValidityName,updateListCountryInDictionary,borderAlertCountryMissing}
+    mapStateToProps, {updateInput,getRequestAction,checkValidityName,updateListCountryInDictionary,colorCountryMissing}
 )(AddressInfo);

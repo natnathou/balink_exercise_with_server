@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import PersonalInfo from "./PersonalInfo"
 import AddressInfo from "./AddressInfo";
 import ContactInfo from "./ContactInfo";
-import {changeStep,updateInput,checkValidityName,checkValidityEmail,checkValidityPhone,checkValidity,postRequestAction,borderAlertCountryMissing} from "../actions"
+import {changeStep,updateInput,checkValidityName,checkValidityEmail,checkValidityPhone,checkValidity,postRequestAction,colorCountryMissing} from "../actions"
 import "../Style/Form.css"
 
 class AllInfos extends React.Component{
@@ -62,10 +62,10 @@ class AllInfos extends React.Component{
                 // we check with == and not === because at  initialization valueInput.country is a number and after it's updated it change his type
                 if (this.props.valueInput.country == 0){
                     // if the user change his select for "no select" so we want to alert him
-                    this.props.borderAlertCountryMissing("#E74C3C");
+                    this.props.colorCountryMissing("#E74C3C");
                 } else {
                     // we remove the alert
-                    this.props.borderAlertCountryMissing("#5D6D7E");
+                    this.props.colorCountryMissing("#5D6D7E");
                     //we change the step
                     this.props.changeStep(3);
                     this.refButtons.current.style.cssText = "justify-content: space-between;";
@@ -143,5 +143,5 @@ const mapStateToProps = state => {
     return {languageReducer,stepReducer,valueInput,successReducer}
 };
 export default connect(
-    mapStateToProps,{changeStep,updateInput,checkValidityName,checkValidityEmail,checkValidityPhone,checkValidity,postRequestAction,borderAlertCountryMissing}
+    mapStateToProps,{changeStep,updateInput,checkValidityName,checkValidityEmail,checkValidityPhone,checkValidity,postRequestAction,colorCountryMissing}
 )(AllInfos);
