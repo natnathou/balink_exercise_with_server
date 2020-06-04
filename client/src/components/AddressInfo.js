@@ -1,6 +1,6 @@
 import React  from "react";
 import {connect} from "react-redux";
-import {updateInput,getRequestAction,checkValidityName} from "../actions"
+import {updateInput,getRequestAction,checkValidityName,updateListCountryInDictionary,borderAlertCountryMissing} from "../actions"
 import "../Style/Form.css"
 
 class AddressInfo extends React.Component{
@@ -10,64 +10,41 @@ class AddressInfo extends React.Component{
     }
     componentDidMount() {
         // get request with axios to get the list of all country from our server
-        this.props.getRequestAction('country');
+        this.getRequestAsyncAwait();
     }
 
-    listCountry = () => {
-        //we check the response of our get request, we display an empty div if the request is empty, if not we display country list
+    getRequestAsyncAwait = async () =>{
+        await this.props.getRequestAction('country');
         if (this.props.countryReducer.response){
-            switch (this.props.languageReducer.lang) {
-                case "en":
-                    return (
-                        this.props.countryReducer.response.data.en.map( data =>{
-                            let values;
-                            if (data==="State"){
-                                values ="";
-                            } else {
-                                values = data
-                            }
-                            return <option value={values} key={data}>{data}</option>
-
-                    }));
-                case "fr":
-                    return (
-                        this.props.countryReducer.response.data.fr.map( data =>{
-                            let values;
-                            if (data==="Pays"){
-                                values ="";
-                            } else {
-                                values = data
-                            }
-                            return <option value={values} key={data}>{data}</option>
-                        }));
-                default:
-                    break;
-            }
-        } else {
-            return <div></div>
+            this.props.updateListCountryInDictionary(this.props.countryReducer.response);
         }
     };
-
-    //To avoid error in first compile, because at the initialisation, country list is not already fetched so, to avoid display div tag in select tag,  in place of option tag in select tag,
-    // we create the method below, to display div tag in place of selected if the list is not already fetched
+    // methode to display our country list
     selectRender= ()=> {
-        if(this.props.countryReducer.response){
-            return(
+         return(
                 <select
+                    // initial value is 0, so we will test in another component if the user choose a country or not
                     value={this.props.valueInput.country}
                     ref={this.refSelect}
                     onChange={async (e) => {
+                        // we update the value of valueInput with target value
                         await this.props.updateInput("country", e.target.value);
-
+                        // we check with == and not === because at  initialisation valueInput.country is a number and after it's updated it change his type
+                        if (this.props.valueInput.country == 0){
+                            // if the user change his select for "no select" so we want to alert him
+                            this.props.borderAlertCountryMissing("#E74C3C");
+                        } else {
+                            // we remove the alert
+                            this.props.borderAlertCountryMissing("#5D6D7E");
+                        }
                     }}
-                    style={{border: `${this.props.cssChangeBorderAlertCountryMissingReducer}`}}
+                    style={{color: `${this.props.cssChangeBorderAlertCountryMissingReducer}`}}
                 >
-                    {this.listCountry()}
+                    {this.props.languageReducer.listCountry.map(  (data, index) => {
+                        return (<option value={index} key={data}>{data}</option>)
+                    })}
                 </select>
             );
-        } else {
-            return <div></div>
-        }
     };
 
     render(){
@@ -96,8 +73,9 @@ class AddressInfo extends React.Component{
 
 const mapStateToProps = state => {
     let {languageReducer,valueInput,countryReducer,cssChangeBorderAlertCountryMissingReducer} = state;
+    console.log(state);
     return {languageReducer,valueInput,countryReducer,cssChangeBorderAlertCountryMissingReducer}
 };
 export default connect(
-    mapStateToProps, {updateInput,getRequestAction,checkValidityName}
+    mapStateToProps, {updateInput,getRequestAction,checkValidityName,updateListCountryInDictionary,borderAlertCountryMissing}
 )(AddressInfo);

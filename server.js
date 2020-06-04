@@ -11,8 +11,7 @@ app.post('/user/new', (req, res) => {
     res.status(200).end();
 });
 app.get('/country', (req, res) => {
-    res.json({en:["State","France", "Usa", "Israel"], fr:["Pays","France", "Amerique", "Israel"]});
-
+    res.json({en:["State","France", "Usa", "Israel","Italy","Spain","Portugal"], fr:["Pays","France", "Amérique", "Israel","Italie","Espagne","Portugal"]});
 });
 
 

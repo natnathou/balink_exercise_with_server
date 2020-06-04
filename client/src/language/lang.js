@@ -11,7 +11,8 @@ const lang = {
         name: "Name",
         street: "House Number & Street",
         city:"City",
-        country: "Country",
+        country: "",
+        listCountry:["Country"],
         emailAddress: "Email Address",
         phoneNumber: "Phone Number",
         emailError: "Your email is not valid",
@@ -31,7 +32,8 @@ const lang = {
         name: "Nom",
         street: "Numéros de maison & Rue",
         city:"Ville",
-        country: "Pays",
+        country: "",
+        listCountry:["Pays"],
         emailAddress: "Adresse email",
         phoneNumber: "Téléphone",
         emailError: "Votre email n'est pas valide",
@@ -39,7 +41,6 @@ const lang = {
         nameError: "Cette entrée ne peut pas être vide",
         success: "Succès"
     }
-
 };
 
 export default lang;

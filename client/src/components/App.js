@@ -8,6 +8,11 @@ import "../Style/App.css"
 
 
 class App extends React.Component {
+    componentDidMount() {
+        // language initialization
+        this.props.changeLanguage("fr");
+    }
+
     onChangeLanguage = (event)=>{
         this.props.changeLanguage(event.target.value);
     };

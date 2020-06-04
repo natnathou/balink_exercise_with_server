@@ -1,11 +1,26 @@
 import {combineReducers} from "redux";
 import lang from "../language/lang"
 
-//desc: reducer, to save the actual language display
-const languageReducer = ( defaultLanguage = lang.fr, action) => {
+//desc: reducer, to to store our dictionary in our state and when we fetch list country from our server we update the dictionary
+
+const jsonLanguageReducer = ( defaultLanguage = lang, action) => {
+    switch (action.type) {
+        case "UPDATE_DICTIONARY":
+            let languageUpdated = {...defaultLanguage};
+            languageUpdated.en.listCountry=action.payload.data.en;
+            languageUpdated.fr.listCountry=action.payload.data.fr;
+            return languageUpdated;
+        default: return defaultLanguage;
+    }
+};
+
+//desc: reducer, to save the actual language display, at initialisation default language is empty, so we will initialize it in componentDidMount of our APP
+//we choice the option to save lang ../language/lang in jsonLanguageReducer, update it when we fetch country list. So languageReducer will render jsonLanguageReducer with the right language.
+//We choose this option to simplify the integration of country list in our dictionary, and the user will switch language it will display the same country that he choose.
+const languageReducer = ( defaultLanguage = {}, action) => {
     switch (action.type){
         case "CHANGE_LANGUAGE":
-            return lang[action.payload];
+            return action.payload.jsonLanguageReducer[action.payload.language];
         default:
             return defaultLanguage;
     }
@@ -33,7 +48,7 @@ const valueInput = (
         name:"",
         street:"",
         city:"",
-        country:"",
+        country:0,
         email:"",
         phone: ""
     },
@@ -95,7 +110,7 @@ const successReducer = (state={
     }
 };
 
-const cssChangeBorderAlertCountryMissingReducer = (css="0px solid", action) => {
+const cssChangeBorderAlertCountryMissingReducer = (css="#5D6D7E", action) => {
     switch (action.type) {
         case "BORDER_ALERT_COUNTRY_MISSING":
             return (action.payload);
@@ -105,10 +120,11 @@ const cssChangeBorderAlertCountryMissingReducer = (css="0px solid", action) => {
 };
 
 export default combineReducers({
+    jsonLanguageReducer,
     languageReducer,
     stepReducer,
     valueInput,
     countryReducer,
     successReducer,
-    cssChangeBorderAlertCountryMissingReducer
+    cssChangeBorderAlertCountryMissingReducer,
 })

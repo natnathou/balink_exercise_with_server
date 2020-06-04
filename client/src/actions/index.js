@@ -1,13 +1,22 @@
 import request from "../api/api";
 
-// desc: action to change the display language
-export const changeLanguage = (language) => {
+// desc: action to update country list in our dictionary
+export const updateListCountryInDictionary = (objectToUpdate) => {
     return {
-        type: "CHANGE_LANGUAGE",
-        payload: language
+        type: "UPDATE_DICTIONARY",
+        payload: objectToUpdate
     }
-
 };
+
+// desc: action to change the display language
+export const changeLanguage = (language) => async (dispatch,getState) => {
+    let {jsonLanguageReducer} = getState();
+    dispatch({
+        type: "CHANGE_LANGUAGE",
+        payload: {jsonLanguageReducer, language}
+    })
+};
+
 
 //desc: action to change the step
 export const changeStep = (stepNumber) =>{

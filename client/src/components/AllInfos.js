@@ -18,13 +18,15 @@ class AllInfos extends React.Component{
     }
 
     onPrev = () => {
-        // we will test if witch step we are and we will update the new step in our reducer, and modify the display of our button
+        // we will test in wich step we are and we will update the new step in our reducer, and modify the display of our button
         switch (this.props.stepReducer.step) {
             case 2:
+                //we change the step
                 this.props.changeStep(1);
                 this.refButtons.current.style.cssText = "justify-content: center;";
                 break;
             case 3:
+                //we change the step
                 this.props.changeStep(2);
                 this.refButtons.current.style.cssText = "justify-content: space-between;";
                 break;
@@ -34,7 +36,7 @@ class AllInfos extends React.Component{
 
     };
     onNext = () => {
-        // we will test if witch step
+        // we will test in wich step we are
         switch (this.props.stepReducer.step) {
             case 1:
                 //test if firstName and Name are not empty
@@ -48,18 +50,23 @@ class AllInfos extends React.Component{
                 }  else if (this.props.valueInput.firstName === this.props.languageReducer.nameError || this.props.valueInput.name === this.props.languageReducer.nameError) {
                     break;
                 }  else {
+                    //we change the step
                     this.props.changeStep(2);
                     this.refButtons.current.style.cssText = "justify-content: space-between;";
                 }
                 break;
 
             case 2:
+                console.log(this.props.valueInput.country );
                 //test if country in not empty
-                if (this.props.valueInput.country === ''){
-                    this.props.borderAlertCountryMissing("1px solid #E74C3C");
+                // we check with == and not === because at  initialization valueInput.country is a number and after it's updated it change his type
+                if (this.props.valueInput.country == 0){
+                    // if the user change his select for "no select" so we want to alert him
+                    this.props.borderAlertCountryMissing("#E74C3C");
                 } else {
-                    // we remove border color. (the border was to alert the client that he did not choose a country)
-                    this.props.borderAlertCountryMissing("0px solid");
+                    // we remove the alert
+                    this.props.borderAlertCountryMissing("#5D6D7E");
+                    //we change the step
                     this.props.changeStep(3);
                     this.refButtons.current.style.cssText = "justify-content: space-between;";
                 }
@@ -120,8 +127,6 @@ class AllInfos extends React.Component{
                 );
         }
     }
-
-
 
     render(){
         return (
