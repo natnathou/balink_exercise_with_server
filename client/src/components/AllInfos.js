@@ -57,7 +57,6 @@ class AllInfos extends React.Component{
                 break;
 
             case 2:
-                console.log(this.props.valueInput.country );
                 //test if country in not empty
                 // we check with == and not === because at  initialization valueInput.country is a number and after it's updated it change his type
                 if (this.props.valueInput.country == 0){
