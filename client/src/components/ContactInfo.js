@@ -30,7 +30,6 @@ class ContactInfo extends React.Component{
 
 const mapStateToProps = state => {
     let {languageReducer,valueInput} = state;
-    console.log(state);
     return {languageReducer,valueInput}
 };
 export default connect(
