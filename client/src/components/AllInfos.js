@@ -36,6 +36,9 @@ class AllInfos extends React.Component{
 
     };
     onNext = () => {
+        //error statue initialization
+        this.props.updateStatueError("firstName", false);
+        this.props.updateStatueError("name", false);
         // we will test in which step we are
         switch (this.props.stepReducer.step) {
             case 1:
@@ -87,6 +90,9 @@ class AllInfos extends React.Component{
     };
 
     onSend = async (event) => {
+        //error statue initialization
+        this.props.updateStatueError("email", false);
+        this.props.updateStatueError("phone", false);
         event.preventDefault();
         //test if email and phone are in the right format
         if (this.props.checkValidityEmail(this.props.valueInput.email).payload && this.props.checkValidityPhone(this.props.valueInput.phone).payload) {

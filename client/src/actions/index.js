@@ -164,10 +164,13 @@ export const updateStatueError = (errorName, stat) => {
 //action to update error message with the right language
 export const updateErrorMessageInInput = () => (dispatch,getState) => {
     let {valueInput,languageReducer, errorStatue} = getState();
+    console.log(errorStatue);
     if (errorStatue.firstName){
+        console.log("firstName");
         valueInput.firstName=languageReducer.nameError;
     }
     if (errorStatue.name){
+        console.log("name");
         valueInput.name=languageReducer.nameError
     }
     if (errorStatue.email){
