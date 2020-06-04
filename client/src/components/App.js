@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {changeLanguage} from "../actions"
+import {changeLanguage,updateInput,updateErrorMessageInInput} from "../actions"
 import AllSteps from "./Step/AllSteps";
 import AllInfos from "./AllInfos";
 import Success from "./success"
@@ -13,8 +13,10 @@ class App extends React.Component {
         this.props.changeLanguage("fr");
     }
 
-    onChangeLanguage = (event)=>{
-        this.props.changeLanguage(event.target.value);
+    onChangeLanguage =  async event=>{
+
+        await this.props.changeLanguage(event.target.value);
+        this.props.updateErrorMessageInInput();
     };
     render() {
         return (
@@ -40,11 +42,11 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => {
-    let {successReducer}=state;
-    return {successReducer}
+    let {successReducer,valueInput,languageReducer,errorStatue}=state;
+    return {successReducer,valueInput,languageReducer,errorStatue}
 };
 export default connect(
-    mapStateToProps,{changeLanguage}
+    mapStateToProps,{changeLanguage,updateInput,updateErrorMessageInInput}
 )(App);
 
 

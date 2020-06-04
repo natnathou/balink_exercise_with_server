@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import PersonalInfo from "./PersonalInfo"
 import AddressInfo from "./AddressInfo";
 import ContactInfo from "./ContactInfo";
-import {changeStep,updateInput,checkValidityName,checkValidityEmail,checkValidityPhone,checkValidity,postRequestAction,colorCountryMissing} from "../actions"
+import {changeStep,updateInput,checkValidityName,checkValidityEmail,checkValidityPhone,checkValidity,postRequestAction,colorCountryMissing,updateStatueError} from "../actions"
 import "../Style/Form.css"
 
 class AllInfos extends React.Component{
@@ -36,20 +36,32 @@ class AllInfos extends React.Component{
 
     };
     onNext = () => {
-        // we will test in wich step we are
+        // we will test in which step we are
         switch (this.props.stepReducer.step) {
             case 1:
                 //test if firstName and Name are not empty
                 if (!this.props.checkValidityName(this.props.valueInput.firstName).payload && !this.props.checkValidityName(this.props.valueInput.name).payload){
+                    //update error statue
+                    this.props.updateStatueError("firstName", true);
+                    //update error statue
+                    this.props.updateStatueError("name", true);
                     this.props.updateInput("firstName", this.props.languageReducer.nameError);
                     this.props.updateInput("name", this.props.languageReducer.nameError);
                 } else if (!this.props.checkValidityName(this.props.valueInput.firstName).payload){
+                    //update error statue
+                    this.props.updateStatueError("firstName", true);
                     this.props.updateInput("firstName", this.props.languageReducer.nameError);
                 } else if (!this.props.checkValidityName(this.props.valueInput.name).payload){
+                    //update error statue
+                    this.props.updateStatueError("name", true);
                     this.props.updateInput("name", this.props.languageReducer.nameError);
                 }  else if (this.props.valueInput.firstName === this.props.languageReducer.nameError || this.props.valueInput.name === this.props.languageReducer.nameError) {
                     break;
                 }  else {
+                    //update error statue
+                    this.props.updateStatueError("firstName", false);
+                    //update error statue
+                    this.props.updateStatueError("name", false);
                     //we change the step
                     this.props.changeStep(2);
                     this.refButtons.current.style.cssText = "justify-content: space-between;";
@@ -79,16 +91,28 @@ class AllInfos extends React.Component{
         event.preventDefault();
         //test if email and phone are in the right format
         if (this.props.checkValidityEmail(this.props.valueInput.email).payload && this.props.checkValidityPhone(this.props.valueInput.phone).payload) {
+            //update error statue
+            this.props.updateStatueError("email", false);
+            //update error statue
+            this.props.updateStatueError("phone", false);
             // display success
             this.props.checkValidity(true);
             //Post Request, we receive just statue 200, "ok", in the response
             this.props.postRequestAction('user/new');
         } else if (!this.props.checkValidityEmail(this.props.valueInput.email).payload && !this.props.checkValidityPhone(this.props.valueInput.phone).payload) {
+            //update error statue
+            this.props.updateStatueError("email", true);
+            //update error statue
+            this.props.updateStatueError("phone", true);
             this.props.updateInput("email", this.props.languageReducer.emailError);
             this.props.updateInput("phone", this.props.languageReducer.phoneError);
         } else if (!this.props.checkValidityEmail(this.props.valueInput.email).payload) {
+            //update error statue
+            this.props.updateStatueError("email", true);
             this.props.updateInput("email", this.props.languageReducer.emailError);
         } else if (!this.props.checkValidityPhone(this.props.valueInput.phone).payload) {
+            //update error statue
+            this.props.updateStatueError("phone", true);
             this.props.updateInput("phone", this.props.languageReducer.phoneError);
         }
     };
@@ -138,9 +162,9 @@ class AllInfos extends React.Component{
 }
 
 const mapStateToProps = state => {
-    let {languageReducer,stepReducer,valueInput,successReducer} = state;
-    return {languageReducer,stepReducer,valueInput,successReducer}
+    let {languageReducer,stepReducer,valueInput,successReducer,errorStatue} = state;
+    return {languageReducer,stepReducer,valueInput,successReducer,errorStatue}
 };
 export default connect(
-    mapStateToProps,{changeStep,updateInput,checkValidityName,checkValidityEmail,checkValidityPhone,checkValidity,postRequestAction,colorCountryMissing}
+    mapStateToProps,{changeStep,updateInput,checkValidityName,checkValidityEmail,checkValidityPhone,checkValidity,postRequestAction,colorCountryMissing,updateStatueError}
 )(AllInfos);

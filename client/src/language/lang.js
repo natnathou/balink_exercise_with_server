@@ -12,7 +12,7 @@ const lang = {
         street: "House Number & Street",
         city:"City",
         country: "",
-        listCountry:["Country"],
+        listCountry:["State"],
         emailAddress: "Email Address",
         phoneNumber: "Phone Number",
         emailError: "Your email is not valid",

@@ -26,6 +26,7 @@ const languageReducer = ( defaultLanguage = {}, action) => {
     }
 };
 
+
 //desc: reducer, to save the actual step
 const stepReducer = (stepDisplay= {
     step: 1,
@@ -37,6 +38,16 @@ const stepReducer = (stepDisplay= {
             return action.payload;
         default:
             return stepDisplay
+    }
+};
+
+//desc: reducer, to save response of our get request to fetch the list of ours country
+const countryReducer = (countryArray = [], action) => {
+    switch (action.type) {
+        case "GET_REQUEST":
+            return (action.payload);
+        default:
+            return countryArray;
     }
 };
 
@@ -53,10 +64,10 @@ const valueInput = (
         phone: ""
     },
     action) => {
+    let newObjectValue = {...value};
     if (action.type === "UPDATE_INPUT") {
         switch (action.payload.title) {
             case "gender":
-                let newObjectValue = {...value};
                 newObjectValue.gender.value=action.payload.value;
                 if (action.payload.value === "Mr"){
                     newObjectValue.gender.checkedMr = true;
@@ -84,17 +95,10 @@ const valueInput = (
                 return {...value};
         }
     }
-    return value;
-};
-
-//desc: reducer, to save response of our get request to fetch the list of ours country
-const countryReducer = (countryArray = [], action) => {
-    switch (action.type) {
-        case "GET_REQUEST":
-            return (action.payload);
-        default:
-            return countryArray;
+    if (action.type === "UPDATE_ERROR_MESSAGE"){
+        return {...action.payload}
     }
+    return value;
 };
 
 //desc: reducer, to save statue in our state if all steps are an success
@@ -119,6 +123,21 @@ const cssChangeColorCountryMissingReducer = (css="#5D6D7E", action) => {
     }
 };
 
+const errorStatue = (state={
+    firstName:false,
+    name:false,
+    email: false,
+    phone: false
+}, action) => {
+    let newState = state;
+    switch (action.type) {
+        case "ERR_STATUE_UPDATE":
+            newState[action.payload.errorName]=action.payload.stat;
+            return newState;
+    }
+    return state
+};
+
 export default combineReducers({
     dictionaryReducer,
     languageReducer,
@@ -127,4 +146,5 @@ export default combineReducers({
     countryReducer,
     successReducer,
     cssChangeColorCountryMissingReducer,
+    errorStatue
 })

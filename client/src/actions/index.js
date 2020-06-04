@@ -109,6 +109,7 @@ export const checkValidity = (statue= false) => {
     }
 };
 
+
 export const postRequestAction = url => async dispatch => {
     let response = [], error = "";
     try {
@@ -142,11 +143,39 @@ export const getRequestAction = url => async dispatch => {
     });
 };
 
-
+// action to change the color of coutry list if the country missing
 export const colorCountryMissing = (cssChange) => {
     return {
         type: "COUNTRY_MISSING",
         payload: cssChange
     }
 
+};
+
+export const updateStatueError = (errorName, stat) => {
+    return {
+        type: "ERR_STATUE_UPDATE",
+        payload: {errorName,stat}
+    }
+};
+
+//action to update error message with the right language
+export const updateErrorMessageInInput = () => (dispatch,getState) => {
+    let {valueInput,languageReducer, errorStatue} = getState();
+    if (errorStatue.firstName){
+        valueInput.firstName=languageReducer.nameError;
+    }
+    if (errorStatue.name){
+        valueInput.name=languageReducer.nameError
+    }
+    if (errorStatue.email){
+        valueInput.email=languageReducer.emailError;
+    }
+    if (errorStatue.phone) {
+        valueInput.phone = languageReducer.phoneError;
+    }
+    dispatch({
+        type: "UPDATE_ERROR_MESSAGE",
+        payload: valueInput
+    })
 };
