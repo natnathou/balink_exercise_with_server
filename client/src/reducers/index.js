@@ -134,6 +134,7 @@ const errorStatue = (state={
         case "ERR_STATUE_UPDATE":
             newState[action.payload.errorName]=action.payload.stat;
             return newState;
+        default:
     }
     return state
 };

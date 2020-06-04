@@ -57,6 +57,7 @@
     color:#5D6D7E;
 }
 .Inputs select{
+    width: 80px;
     border: 0;
     border-radius: 3px;
 }

@@ -37,7 +37,7 @@ const lang = {
         emailAddress: "Adresse email",
         phoneNumber: "Téléphone",
         emailError: "Votre email n'est pas valide",
-        phoneError: "votre numéros de téléphone n'est pas valide",
+        phoneError: "Votre numéros de téléphone n'est pas valide",
         nameError: "Cette entrée ne peut pas être vide",
         success: "Succès"
     }

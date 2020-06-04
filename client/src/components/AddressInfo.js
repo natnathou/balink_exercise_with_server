@@ -33,8 +33,7 @@ class AddressInfo extends React.Component{
                     onChange={async (e) => {
                         // we update the value of valueInput with target value
                         await this.props.updateInput("country", e.target.value);
-                        // we check with == and not === because at  initialisation valueInput.country is a number and after it's updated it change his type
-                        if (this.props.valueInput.country == 0){
+                        if (parseInt(this.props.valueInput.country) === 0){
                             // if the user change his select for "no select" so we want to alert him
                             this.props.colorCountryMissing("#E74C3C");
                         } else {

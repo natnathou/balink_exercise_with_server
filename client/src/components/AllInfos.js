@@ -70,8 +70,7 @@ class AllInfos extends React.Component{
 
             case 2:
                 //test if country in not empty
-                // we check with == and not === because at  initialization valueInput.country is a number and after it's updated it change his type
-                if (this.props.valueInput.country == 0){
+                if (parseInt(this.props.valueInput.country) === 0){
                     // if the user change his select for "no select" so we want to alert him
                     this.props.colorCountryMissing("#E74C3C");
                 } else {
