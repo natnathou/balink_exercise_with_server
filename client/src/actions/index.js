@@ -55,7 +55,9 @@ export const updateInput = (title, value) => {
 
 //desc: action to check if an input is not empty
 export const checkValidityName = (names = null) =>{
-    if(names === ""){
+    // check if the string is empty
+    let testReg = /^\s*\S+.*/;
+    if(!testReg.test(names)){
         return {
             type: "CHECK_VALIDITY_NAME",
             payload: false
