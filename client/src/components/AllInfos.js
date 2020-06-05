@@ -1,16 +1,26 @@
-import React  from "react";
+import React from "react";
 import {connect} from "react-redux";
 import PersonalInfo from "./PersonalInfo"
 import AddressInfo from "./AddressInfo";
 import ContactInfo from "./ContactInfo";
-import {changeStep,updateInput,checkValidityName,checkValidityEmail,checkValidityPhone,checkValidity,postRequestAction,colorCountryMissing,updateStatueError} from "../actions"
+import {
+    changeStep,
+    updateInput,
+    checkValidityName,
+    checkValidityEmail,
+    checkValidityPhone,
+    checkValidity,
+    postRequestAction,
+    colorCountryMissing,
+    updateStatueError
+} from "../actions"
 import "../Style/Form.css"
 
-class AllInfos extends React.Component{
+class AllInfos extends React.Component {
     constructor(props) {
         super(props);
         this.refButtons = React.createRef();
-        this.refForm = React.createRef();
+        this.refForm    = React.createRef();
     }
 
     componentDidMount() {
@@ -43,24 +53,24 @@ class AllInfos extends React.Component{
         switch (this.props.stepReducer.step) {
             case 1:
                 //test if firstName and Name are not empty
-                if (!this.props.checkValidityName(this.props.valueInput.firstName).payload && !this.props.checkValidityName(this.props.valueInput.name).payload){
+                if (!this.props.checkValidityName(this.props.valueInput.firstName).payload && !this.props.checkValidityName(this.props.valueInput.name).payload) {
                     //update error statue
                     this.props.updateStatueError("firstName", true);
                     //update error statue
                     this.props.updateStatueError("name", true);
                     this.props.updateInput("firstName", this.props.languageReducer.nameError);
                     this.props.updateInput("name", this.props.languageReducer.nameError);
-                } else if (!this.props.checkValidityName(this.props.valueInput.firstName).payload){
+                } else if (!this.props.checkValidityName(this.props.valueInput.firstName).payload) {
                     //update error statue
                     this.props.updateStatueError("firstName", true);
                     this.props.updateInput("firstName", this.props.languageReducer.nameError);
-                } else if (!this.props.checkValidityName(this.props.valueInput.name).payload){
+                } else if (!this.props.checkValidityName(this.props.valueInput.name).payload) {
                     //update error statue
                     this.props.updateStatueError("name", true);
                     this.props.updateInput("name", this.props.languageReducer.nameError);
-                }  else if (this.props.valueInput.firstName === this.props.languageReducer.nameError || this.props.valueInput.name === this.props.languageReducer.nameError) {
+                } else if (this.props.valueInput.firstName === this.props.languageReducer.nameError || this.props.valueInput.name === this.props.languageReducer.nameError) {
                     break;
-                }  else {
+                } else {
                     //update error statue
                     this.props.updateStatueError("firstName", false);
                     //update error statue
@@ -73,7 +83,7 @@ class AllInfos extends React.Component{
 
             case 2:
                 //test if country in not empty
-                if (parseInt(this.props.valueInput.country) === 0){
+                if (parseInt(this.props.valueInput.country) === 0) {
                     // if the user change his select for "no select" so we want to alert him
                     this.props.colorCountryMissing("#E74C3C");
                 } else {
@@ -122,7 +132,7 @@ class AllInfos extends React.Component{
         }
     };
 
-    infoRender (){
+    infoRender() {
         // ww display the right component in function of the step we are
         switch (this.props.stepReducer.step) {
             case 1:
@@ -136,29 +146,34 @@ class AllInfos extends React.Component{
         }
     }
 
-    buttonRender (){
+    buttonRender() {
         // we display the right button (prev or next in function the step we are
         switch (this.props.stepReducer.step) {
             case 3:
                 return (
                     <div className="Buttons" ref={this.refButtons}>
-                        <div onClick={this.onPrev} style={{display: `${this.props.stepReducer.buttonPrevDisplay}`}}>{this.props.languageReducer.prev}</div>
-                        <button onClick={this.onNext} style={{display: `${this.props.stepReducer.buttonNextDisplay}`}}>{this.props.languageReducer.send}</button>
+                        <div onClick={this.onPrev}
+                             style={{display: `${this.props.stepReducer.buttonPrevDisplay}`}}>{this.props.languageReducer.prev}</div>
+                        <button onClick={this.onNext}
+                                style={{display: `${this.props.stepReducer.buttonNextDisplay}`}}>{this.props.languageReducer.send}</button>
                     </div>
                 );
             default:
                 return (
                     <div className="Buttons" ref={this.refButtons}>
-                        <div onClick={this.onPrev} style={{display: `${this.props.stepReducer.buttonPrevDisplay}`}}>{this.props.languageReducer.prev}</div>
-                        <div onClick={this.onNext} style={{display: `${this.props.stepReducer.buttonNextDisplay}`}}>{this.props.languageReducer.next}</div>
+                        <div onClick={this.onPrev}
+                             style={{display: `${this.props.stepReducer.buttonPrevDisplay}`}}>{this.props.languageReducer.prev}</div>
+                        <div onClick={this.onNext}
+                             style={{display: `${this.props.stepReducer.buttonNextDisplay}`}}>{this.props.languageReducer.next}</div>
                     </div>
                 );
         }
     }
 
-    render(){
+    render() {
         return (
-            <form className="Form" ref={this.refForm} onSubmit={this.onSend} style={{display: `${this.props.successReducer.displayApp}`}}>
+            <form className="Form" ref={this.refForm} onSubmit={this.onSend}
+                  style={{display: `${this.props.successReducer.displayApp}`}}>
                 {this.infoRender()}
                 {this.buttonRender()}
             </form>
@@ -167,9 +182,19 @@ class AllInfos extends React.Component{
 }
 
 const mapStateToProps = state => {
-    let {languageReducer,stepReducer,valueInput,successReducer,errorStatue} = state;
-    return {languageReducer,stepReducer,valueInput,successReducer,errorStatue}
+    let {languageReducer, stepReducer, valueInput, successReducer, errorStatue} = state;
+    return {languageReducer, stepReducer, valueInput, successReducer, errorStatue}
 };
 export default connect(
-    mapStateToProps,{changeStep,updateInput,checkValidityName,checkValidityEmail,checkValidityPhone,checkValidity,postRequestAction,colorCountryMissing,updateStatueError}
+    mapStateToProps, {
+        changeStep,
+        updateInput,
+        checkValidityName,
+        checkValidityEmail,
+        checkValidityPhone,
+        checkValidity,
+        postRequestAction,
+        colorCountryMissing,
+        updateStatueError
+    }
 )(AllInfos);

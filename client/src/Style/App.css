@@ -1,26 +1,26 @@
-.App{
+.App {
     height: 100%;
     width: 780px;
     margin: auto;
-    color:#5D6D7E;
+    color: #5D6D7E;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     font-family: 'Roboto', sans-serif;
 }
 
-.AppDown{
-    margin:auto;
+.AppDown {
+    margin: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.langChoose{
+.langChoose {
     width: 30px;
 }
 
-.langChoose>select{
+.langChoose > select {
     border: 0;
-    color:#5D6D7E;
+    color: #5D6D7E;
 }

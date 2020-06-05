@@ -1,11 +1,11 @@
-import React  from "react";
+import React from "react";
 import {connect} from "react-redux";
 import {updateInput} from "../actions"
 import "../Style/Form.css"
 
-class PersonalInfo extends React.Component{
+class PersonalInfo extends React.Component {
 
-    render(){
+    render() {
         return (
             <div className="BlockInputAndCheckbox" style={{height: '150px'}}>
                 <div className="Checkbox">
@@ -52,8 +52,8 @@ class PersonalInfo extends React.Component{
 }
 
 const mapStateToProps = state => {
-    let {languageReducer,stepReducer,valueInput} = state;
-    return {languageReducer,stepReducer,valueInput}
+    let {languageReducer, stepReducer, valueInput} = state;
+    return {languageReducer, stepReducer, valueInput}
 };
 export default connect(
     mapStateToProps, {updateInput}
