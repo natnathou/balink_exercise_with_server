@@ -54,7 +54,7 @@ const countryReducer = (countryArray = [], action) => {
 //desc: reducer, to save all our input to switch to a controlled component
 const valueInput = (
     value = {
-        gender   : {value: "", checkedMr: false, checkedMrs: false},
+        gender   : {value: "", checkedMr:false, checkedMrs:false},
         firstName: "",
         name     : "",
         street   : "",

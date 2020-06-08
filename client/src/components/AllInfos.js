@@ -1,8 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import PersonalInfo from "./PersonalInfo"
-import AddressInfo from "./AddressInfo";
-import ContactInfo from "./ContactInfo";
+import Form from "./Form/Form";
 import {
     changeStep,
     updateInput,
@@ -132,19 +130,6 @@ class AllInfos extends React.Component {
         }
     };
 
-    infoRender() {
-        // ww display the right component in function of the step we are
-        switch (this.props.stepReducer.step) {
-            case 1:
-                return <PersonalInfo/>;
-            case 2:
-                return <AddressInfo/>;
-            case 3:
-                return <ContactInfo/>;
-            default:
-                break;
-        }
-    }
 
     buttonRender() {
         // we display the right button (prev or next in function the step we are
@@ -174,7 +159,7 @@ class AllInfos extends React.Component {
         return (
             <form className="Form" ref={this.refForm} onSubmit={this.onSend}
                   style={{display: `${this.props.successReducer.displayApp}`}}>
-                {this.infoRender()}
+                <Form/>
                 {this.buttonRender()}
             </form>
         )
