@@ -59,7 +59,7 @@ class Form extends React.Component {
                         textLabel={data.textLabel}
                         id={data.id}
                         optionArray={this.props.languageReducer.listCountry}
-                        value={this.props.valueInput[data.id]}
+                        value={this.props.valueInput[data.name]}
                         handleChange={async e => {
                             await this.props.updateInput("country", e.target.value);
                             if (parseInt(this.props.valueInput.country) === 0) {

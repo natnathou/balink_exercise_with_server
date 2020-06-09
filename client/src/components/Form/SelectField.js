@@ -12,7 +12,7 @@ const labelTag = (label, textLabel, id) => {
 };
 
 const optonTag = (optionArray) => optionArray.map((data, index) => {
-    return <option key={index} value={data}>{data}</option>
+    return <option key={index} value={index}>{data}</option>
 });
 
 const SelectField = ({

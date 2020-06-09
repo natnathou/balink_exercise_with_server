@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import Form from "./Form/Form";
+import Form from "../Form/Form";
 import {
     changeStep,
     updateInput,
@@ -11,10 +11,10 @@ import {
     postRequestAction,
     colorCountryMissing,
     updateStatueError
-} from "../actions"
-import "../Style/Form.css"
+} from "../../actions"
+import "../../Style/Form.css"
 
-class AllInfos extends React.Component {
+class Infos extends React.Component {
     constructor(props) {
         super(props);
         this.refButtons = React.createRef();
@@ -182,4 +182,4 @@ export default connect(
         colorCountryMissing,
         updateStatueError
     }
-)(AllInfos);
+)(Infos);

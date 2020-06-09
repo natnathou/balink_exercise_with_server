@@ -1,9 +1,9 @@
 import React from "react";
 import {connect} from "react-redux";
 import {changeLanguage, updateInput, updateErrorMessageInInput} from "../actions"
-import AllSteps from "./Step/AllSteps";
-import AllInfos from "./AllInfos";
-import Success from "./success"
+import Steps from "./Step/Steps";
+import Infos from "./Infos/Infos";
+import Success from "./Success/success"
 import "../Style/App.css"
 
 
@@ -30,11 +30,11 @@ class App extends React.Component {
                 </div>
                 <div className="AppDown">
                     <div>
-                        <AllSteps/>
+                        <Steps/>
                     </div>
                     <div>
                         <Success/>
-                        <AllInfos/>
+                        <Infos/>
                     </div>
                 </div>
             </div>
