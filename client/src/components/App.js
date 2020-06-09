@@ -23,7 +23,7 @@ class App extends React.Component {
         return (
             <div className="App">
                 <div className="langChoose">
-                    <select onClick={this.onChangeLanguage}>
+                    <select onChange={this.onChangeLanguage}>
                         <option value="fr">FR</option>
                         <option value="en">EN</option>
                     </select>

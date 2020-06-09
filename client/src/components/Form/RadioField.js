@@ -12,15 +12,15 @@ const labelTag = (label, textLabel, id) => {
 
 const RadioField = ({
                         label = false,
-                        textLabel = null,
-                        type,
-                        id = null,
+                        textLabel = "",
+                        type="",
+                        id = "",
                         required = false,
-                        name = null,
-                        placeholder = null,
+                        name = "",
+                        placeholder = "",
                         value = "",
-                        handleChange,
-                        checked
+                        handleChange =null,
+                        checked=false
 
                     }) => {
 

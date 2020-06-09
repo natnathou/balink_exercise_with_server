@@ -11,18 +11,19 @@ const labelTag = (label, textLabel, id) => {
     }
 };
 
-const optonTag = (optionArray) => optionArray.map((data, index) => {
+const optionTag = (optionArray) => optionArray.map((data, index) => {
     return <option key={index} value={index}>{data}</option>
 });
 
 const SelectField = ({
                          label = false,
-                         textLabel = null,
-                         id = null,
-                         name,
-                         optionArray,
+                         textLabel = "",
+                         id = "",
+                         name="",
+                         optionArray=[],
                          value = "",
-                         handleChange, cssChangeColorCountryMissingReducer
+                         handleChange=null,
+                         cssChangeColorCountryMissingReducer=""
                      }) => {
     return (
         <div className="Inputs">
@@ -34,7 +35,7 @@ const SelectField = ({
                 onChange={handleChange}
                 style={{color: `${cssChangeColorCountryMissingReducer}`}}
             >
-                {optonTag(optionArray)}
+                {optionTag(optionArray)}
             </select>
         </div>
     )

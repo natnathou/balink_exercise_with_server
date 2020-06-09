@@ -16,12 +16,11 @@ class Form extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {updateListCountryCompleted: false};
     }
 
     componentDidMount() {
         // get request to get the list of all country from our server
-        this.getRequestAsyncAwait();
+        this.getRequestAsyncAwait().catch(errorHandler=>{console.log(errorHandler)});
 
     }
 
@@ -29,7 +28,7 @@ class Form extends React.Component {
         await this.props.getRequestAction('country');
         if (this.props.countryReducer) {
             this.props.updateListCountryInDictionary(this.props.countryReducer);
-            this.setState({updateListCountryCompleted: true}); //we update the state to force the component to rerender itself
+            this.forceUpdate(); //we force the component to rerender itself
         }
     };
 

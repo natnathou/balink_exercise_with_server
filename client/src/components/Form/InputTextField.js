@@ -12,14 +12,14 @@ const labelTag = (label, textLabel, id) => {
 
 const InputTextField = ({
                             label = false,
-                            textLabel = null,
-                            type,
-                            id = null,
+                            textLabel = "",
+                            type ="",
+                            id = "",
                             required = false,
-                            name = null,
-                            placeholder = null,
+                            name = "",
+                            placeholder = "",
                             value = "",
-                            handleChange
+                            handleChange=null
 
                         }) => {
 
